@@ -1,0 +1,44 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>Havolalar.uz | {{link.name}}</title>
+    </head>
+    <body>
+        <h1 style='text-align:center'>Havola qo'shish</h1>
+
+        <h2 style='text-align:center'>HTML Forms</h2>
+
+        {% comment %} <form action='' method='POST' class='' id='' style='text-align:center'>
+            
+            <label for=''>Link name:</label><br>
+            <input type='text' name='name' placeholder='Link nomini yozing' 
+                    value="{{data.name}}" required>
+            <small style='color:red'>{% if errors.name %}{{errors.name}}{% endif %}</small>
+            <br><br>
+            
+            <label for=''>Link description:</label><br>
+            <textarea name='description' placeholder='link haqida yozing'>{{data.description}}</textarea><br><br>
+            
+            <label for=''>Link url:</label><br>
+            <input type='text' name='url' placeholder='link url adresini yozing' 
+                   value="{{data.url}}" required>
+            <small style='color:red'>{% if errors.url %}{{errors.url}}{% endif %}</small>
+            <br><br>
+            
+            <input type='submit' value='Yuborish'>
+
+            {% csrf_token %}
+        </form> {% endcomment %}
+
+        <form method='POST' style='text-align:center'>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type='submit' value='Yuborish'>
+        </from>
+
+        <p style='text-align:right'>
+            "Yuborish" tugmasi bosilganda kiritilgan ma'lumotlar POST metodi orqali yuboriladi.
+        </p>
+
+    </body>
+</html>

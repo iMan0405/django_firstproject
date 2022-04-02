@@ -1,0 +1,85 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>Havolalar.uz | {{link.name}}</title>
+    </head>
+    <body>
+        <h1 style='text-align:center'>Registratsiyadan o'tish</h1>
+      
+        <form method='POST'>
+            {% csrf_token %}
+
+            {% for error in form.non_field_errors %}
+                <p style='color:red'>{{error}}</p>
+            {% endfor %}
+
+            <label for=''>Login:</label>
+            <div class='username'>
+                {{form.username}}
+                {% if form.errors.username %}
+                    <small style='color:red'>
+                        {% for error in form.errors.username %}
+                            {{error}}
+                        {% endfor %}
+                    </small>
+                {% endif %}
+            </div>
+            <br>
+
+            <label for=''>Email:</label>
+            <div class='email'>
+                {{form.email}}
+                {% if form.errors.email %}
+                    <small style='color:red'>
+                        {% for error in form.errors.email %}
+                            {{error}}
+                        {% endfor %}
+                    </small>
+                {% endif %}
+            </div>
+            <br>
+
+            <label for=''>Password:</label>
+            <div class='password'>
+                {{form.password}}
+                {% if form.errors.password %}
+                    <small style='color:red'>
+                        {% for error in form.errors.password %}
+                            {{error}}
+                        {% endfor %}
+                    </small>
+                {% endif %}
+            </div>
+            <br>
+
+            <label>Confirm password:</label>
+            <div class='confirm_password'>
+                {{form.confirm_password}}
+                {% if form.errors.confirm_password %}
+                    <small style='color:red'>
+                        {% for error in form.errors.confirm_password %}
+                            {{error}}
+                        {% endfor %}
+                    </small>
+                {% endif %}
+            </div>
+            <br>
+
+            <label>Description:</label>
+            <div class='description'>
+                {{form.description}}
+                {% if form.errors.description %}
+                    <small style='color:red'>
+                        {% for error in form.errors.description %}
+                            {{error}}
+                        {% endfor %}
+                    </small>
+                {% endif %}
+            </div>
+            <br>
+            
+            <input type='submit' value='Yuborish'>
+        </from>
+
+    </body>
+</html>

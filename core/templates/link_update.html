@@ -1,0 +1,25 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>Havolalar.uz</title>
+    </head>
+    <body>
+        <h1 style='text-align:center'>Havola tahrirlash</h1>
+
+        <h2 style='text-align:center'>HTML Forms</h2>
+
+        <form action='' method='POST' class='' id='' style='text-align:center'>
+            
+            {{form.as_p}}
+            
+            <input type='submit' value='Yuborish'>
+
+            {% csrf_token %}
+        </form>
+
+        <p style='text-align:right'>
+            "Yuborish" tugmasi bosilganda kiritilgan ma'lumotlar POST metodi orqali yuboriladi.
+        </p>
+
+    </body>
+</html>

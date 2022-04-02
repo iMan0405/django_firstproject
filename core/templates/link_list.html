@@ -1,0 +1,17 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>Havolalar.uz</title>
+    </head>
+    <body>
+        <div style="text-align:center;">
+            <h1 style="text-align:center; color:green;">Havolalar</h1>
+            {% comment %} <h2>{{title}}</h2> {% endcomment %}
+            {% for link in linklar %}
+                <h2 style="panding:10 px; background:#80808082; border:1 px solid #808080; width:200px; margin:auto;">
+                    <a href="{{link.url}}" style="text-decoration:none; color:green;">{{link.id}}. {{link.name}}</a>
+                </h2>
+            {% endfor %}
+        </div>
+    </body>
+</html>
