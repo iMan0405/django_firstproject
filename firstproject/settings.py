@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from tkinter import E
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'firstproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,3 +130,13 @@ LOGIN_REDIRECT_URL = '/users/chek-user'
 LOGOUT_REDIRECT_URL = '/havolalar'
 
 AUTH_USER_MODEL = 'users.User'
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru' #smtp.gmail.com
+EMAIL_USE_SSL = True
+EMAIL_USE_TSL = False
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'mr.iman0405@gmail.com'
+EMAIL_HOST_PASSWORD = 'hnvqsnbrubcwsbtv'
+DEFAULT_FROM_EMAIL = 'mr.iman0405@gmail.com'

@@ -1,8 +1,8 @@
-from urllib import request
+
 from django import forms
 from django.forms.widgets import PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
+from .models import User
 from django.forms import ValidationError
 
 class LoginForm(forms.Form):
@@ -29,10 +29,19 @@ class LoginForm(forms.Form):
 
 class RegisterForm(forms.Form):
     
-    username = forms.CharField(max_length=120, required=True, label='Login')
-    password = forms.CharField(max_length=100, required=True, widget=forms.PasswordInput)
-    confirm_password = forms.CharField(max_length=100, required=True, widget=forms.PasswordInput)
+    email = forms.EmailField(max_length=120, required=True, label='Elektron pochta')
+    password = forms.CharField(max_length=100, label='Parol',
+                            widget=forms.PasswordInput(attrs={'class':'special'}))
+    confirm_password = forms.CharField(max_length=100, label='Parolni tasdiqlash', 
+                            widget=forms.PasswordInput)
 
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'password']
+        labels = {
+            'first_name':'Ism',
+            'last_name':'Familiya'
+        }
 
     def clean_password(self):
         parol = self.data['password']
@@ -51,8 +60,8 @@ class RegisterForm(forms.Form):
             raise ValidationError("Tasdiqlash paroli noto'g'ri")
         return confirm_parol
     
-    def clean_username(self):
-        username = self.cleaned_data['username']
-        if User.objects.filter(username=username).exists():
-            raise ValidationError("Bunday foydalanuvchi ro'yxatdan o'tgan")
-        return username
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("Ushbu email sistemada ro'yxatdan o'tgan")
+        return email

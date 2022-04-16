@@ -4,9 +4,11 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import LoginForm, RegisterForm
-from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.conf import settings
+from django.contrib.auth import get_user_model
+
+USER = get_user_model()
 
 @login_required
 def chek_user(request):
@@ -32,7 +34,7 @@ def login_view(request):
 
         if form.is_valid():
             username = form.cleaned_data['username']
-            user = User.objects.get(username=username)
+            user = USER.objects.get(username=username)
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, 'registration/login.html', {'form':form})
@@ -46,11 +48,11 @@ def register_view(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = User.objects.create(username=username)
-            user.set_password(password)
-            user.save()
+            fields = form.cleaned_data
+            del fields['confirm_password']
+            user = USER.objects.create_user(**form.cleaned_data)
+            # user.set_password(password)
+            # user.save()
             return render(request, 'registration/register_finish.html', {})
     
     return render(request, 'registration/register.html', {'form':form})
